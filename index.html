@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MARCOS | Free Fire Elite Guild</title>
+    <link href="https://fonts.googleapis.com/css2?family=Audiowide&family=Orbitron:wght@400;700&family=Rajdhani:wght@400;700&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- Variables and Reset --- */
+        :root {
+            --color-ff-dark-bg: #101018;
+            --color-ff-surface: #1f1f2a;
+            --color-ff-accent: #e44d26;
+            --color-ff-neon-blue: #00ffff;
+            --color-ff-text-light: #f0f0f0;
+            --color-ff-text-dark: #b0b0b0;
+            --ff-glow-orange: 0 0 8px var(--color-ff-accent), 0 0 15px rgba(228, 77, 38, 0.7);
+            --ff-glow-blue: 0 0 8px var(--color-ff-neon-blue), 0 0 15px rgba(0, 255, 255, 0.7);
+            --font-primary: 'Orbitron', sans-serif;
+            --font-secondary: 'Rajdhani', sans-serif;
+            --font-title: 'Audiowide', sans-serif;
+            --font-alt-header: 'Oswald', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--color-ff-dark-bg);
+            color: var(--color-ff-text-light);
+            font-family: var(--font-secondary);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
+
+        /* --- Global Typography and Effects --- */
+        .glowing-text-ff {
+            font-family: var(--font-title);
+            color: var(--color-ff-accent);
+            text-shadow: var(--ff-glow-orange);
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+        }
+
+        .glowing-text-ff-blue {
+            font-family: var(--font-title);
+            color: var(--color-ff-neon-blue);
+            text-shadow: var(--ff-glow-blue);
+            transition: all 0.3s ease-in-out;
+            text-transform: uppercase;
+        }
+
+        .section-title-ff {
+            font-family: var(--font-alt-header);
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 15px 20px;
+            position: relative;
+            color: var(--color-ff-neon-blue);
+            text-shadow: var(--ff-glow-blue);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .section-title-ff::before,
+        .section-title-ff::after {
+            content: '';
+            position: absolute;
+            height: 2px;
+            width: 80px;
+            background: linear-gradient(to right, var(--color-ff-neon-blue), transparent);
+            top: 50%;
+            transform: translateY(-50%) skewX(-30deg);
+            box-shadow: var(--ff-glow-blue);
+        }
+        .section-title-ff::before {
+            left: calc(50% - 200px);
+        }
+        .section-title-ff::after {
+            right: calc(50% - 200px);
+            transform: translateY(-50%) skewX(30deg);
+            background: linear-gradient(to left, var(--color-ff-neon-blue), transparent);
+        }
+
+        .section-container-ff {
+            padding: 100px 5%;
+            background-color: var(--color-ff-surface);
+            margin: 60px auto;
+            max-width: 1600px;
+            position: relative;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.2);
+            overflow: hidden;
+        }
+        .section-container-ff::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(-45deg, rgba(0, 255, 255, 0.05), rgba(0, 255, 255, 0.05) 2px, transparent 2px, transparent 4px);
+            z-index: 0;
+            opacity: 0.1;
+        }
+
+        /* --- 1. Hero Banner --- */
+        .hero-banner-ff {
+            /* === UPDATED: FREE FIRE STYLE BACKGROUND URL === */
+            background: 
+                linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                url('https://wallpapers.com/images/high/cherry-blossom-tree-and-mountain-free-fire-desktop-z311hxj1mq9eszp3.webp') no-repeat center center/cover;
+            /* ============================================== */
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Glitch effect for hero background */
+        .hero-banner-ff::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://wallpapersg.com/images/high/cherry-blossom-tree-and-mountain-free-fire-desktop-z311hxj1mq9eszp3.webp') repeat;
+            opacity: 0.05;
+            animation: glitchEffect 10s infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes glitchEffect {
+            0% { transform: translate(0, 0); opacity: 0.05; }
+            20% { transform: translate(-2px, 2px); opacity: 0.07; }
+            40% { transform: translate(3px, -3px); opacity: 0.06; }
+            60% { transform: translate(-1px, 1px); opacity: 0.08; }
+            80% { transform: translate(2px, -2px); opacity: 0.05; }
+            100% { transform: translate(0, 0); opacity: 0.07; }
+        }
+
+        .navbar-ff {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: rgba(16, 16, 24, 0.9);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+            z-index: 100;
+        }
+
+        .nav-logo-ff {
+            font-family: var(--font-title);
+            font-size: 2.2rem;
+            color: var(--color-ff-neon-blue);
+            text-shadow: var(--ff-glow-blue);
+            letter-spacing: 1px;
+        }
+
+        .nav-links-ff a {
+            color: var(--color-ff-text-light);
+            text-decoration: none;
+            font-family: var(--font-primary);
+            margin-left: 40px;
+            padding: 8px 15px;
+            position: relative;
+            transition: color 0.3s, text-shadow 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links-ff a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 100%;
+            height: 2px;
+            background-color: var(--color-ff-neon-blue);
+            box-shadow: var(--ff-glow-blue);
+            transition: transform 0.3s ease-out;
+        }
+
+        .nav-links-ff a:hover {
+            color: var(--color-ff-neon-blue);
+            text-shadow: var(--ff-glow-blue);
+        }
+        .nav-links-ff a:hover::before {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+        .hero-content-ff {
+            margin-top: 100px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-title-ff {
+            font-size: 7rem;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-family: var(--font-title);
+            color: var(--color-ff-accent);
+            text-shadow: var(--ff-glow-orange), 0 0 30px var(--color-ff-accent);
+            letter-spacing: 5px;
+            animation: pulseTitle 3s infinite alternate;
+        }
+
+        @keyframes pulseTitle {
+            0% { text-shadow: var(--ff-glow-orange), 0 0 20px var(--color-ff-accent); }
+            100% { text-shadow: var(--ff-glow-orange), 0 0 40px var(--color-ff-accent), 0 0 60px rgba(228, 77, 38, 0.5); }
+        }
+
+        .slogan-ff {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            color: var(--color-ff-neon-blue);
+            margin-bottom: 50px;
+            text-shadow: var(--ff-glow-blue);
+            letter-spacing: 1px;
+            animation: textFadeIn 2s ease-out forwards;
+            opacity: 0;
+            animation-delay: 0.5s;
+        }
+        @keyframes textFadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Free Fire Style Button */
+        .btn-ff {
+            display: inline-block;
+            padding: 18px 40px;
+            color: var(--color-ff-text-light);
+            background-color: var(--color-ff-accent);
+            border: 2px solid var(--color-ff-accent);
+            text-decoration: none;
+            font-size: 1.3rem;
+            font-family: var(--font-primary);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            transition: all 0.3s ease;
+            box-shadow: var(--ff-glow-orange);
+            clip-path: polygon(0 0, 100% 0, 90% 100%, 10% 100%);
+        }
+
+        .btn-ff::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: 0.5s;
+            z-index: -1;
+        }
+
+        .btn-ff:hover {
+            color: #fff;
+            box-shadow: var(--ff-glow-orange), 0 0 20px var(--color-ff-accent), 0 0 40px var(--color-ff-accent);
+            transform: translateY(-3px);
+            background-color: var(--color-ff-accent);
+        }
+
+        .btn-ff:hover::before {
+            left: 100%;
+        }
+
+        /* --- Text Sections (About, History) --- */
+        .section-text-ff, .history-content-ff p {
+            font-size: 1.2rem;
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 0 20px;
+            text-align: center;
+            font-family: var(--font-secondary);
+            color: var(--color-ff-text-dark);
+            line-height: 1.8;
+        }
+        .section-text-ff strong, .history-content-ff strong {
+            color: var(--color-ff-accent);
+            text-shadow: 0 0 5px rgba(228, 77, 38, 0.5);
+        }
+        .history-content-ff p {
+            margin-bottom: 20px;
+        }
+        .history-content-ff p:nth-child(even) {
+            color: var(--color-ff-text-light);
+        }
+
+        .glowing-quote-ff {
+            font-family: var(--font-primary);
+            font-size: 1.4rem;
+            margin-top: 40px;
+            padding: 15px 20px;
+            border-left: 5px solid var(--color-ff-neon-blue);
+            color: var(--color-ff-neon-blue);
+            text-shadow: var(--ff-glow-blue);
+            background: rgba(0, 255, 255, 0.05);
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
+
+        /* --- 4. Leaders Timeline --- */
+        .leaders-grid-ff {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .leader-card-ff {
+            background-color: var(--color-ff-dark-bg);
+            padding: 35px 25px;
+            border-radius: 8px;
+            text-align: center;
+            width: 250px;
+            position: relative;
+            border: 2px solid var(--color-ff-neon-blue);
+            box-shadow: var(--ff-glow-blue);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%);
+        }
+
+        .leader-card-ff::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 20px; height: 20px;
+            border-top: 2px solid var(--color-ff-neon-blue);
+            border-left: 2px solid var(--color-ff-neon-blue);
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+        }
+        .leader-card-ff::after {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 20px; height: 20px;
+            border-bottom: 2px solid var(--color-ff-neon-blue);
+            border-right: 2px solid var(--color-ff-neon-blue);
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+        }
+
+        .leader-card-ff:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: var(--ff-glow-blue), 0 0 25px rgba(0, 255, 255, 0.6);
+            border-color: var(--color-ff-accent);
+            background-color: rgba(31, 31, 42, 0.8);
+        }
+        
+        .current-leader-ff {
+            border-color: var(--color-ff-accent);
+            box-shadow: var(--ff-glow-orange), 0 0 20px rgba(228, 77, 38, 0.6);
+        }
+        .current-leader-ff .leader-name-ff {
+            color: var(--color-ff-accent);
+            text-shadow: var(--ff-glow-orange);
+        }
+
+
+        .leader-name-ff {
+            font-family: var(--font-primary);
+            font-size: 1.8rem;
+            color: var(--color-ff-neon-blue);
+            text-shadow: var(--ff-glow-blue);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .leader-role-ff {
+            font-family: var(--font-secondary);
+            color: var(--color-ff-text-dark);
+            font-style: italic;
+            font-size: 1.1rem;
+        }
+
+        /* --- 5. Core Members --- */
+        .members-grid-ff {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .member-card-ff {
+            font-family: var(--font-primary);
+            text-align: center;
+            padding: 25px;
+            background-color: var(--color-ff-dark-bg);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            cursor: default;
+            box-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            color: var(--color-ff-text-light);
+            position: relative;
+        }
+
+        .member-card-ff::before {
+            content: '►';
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-ff-neon-blue);
+            font-size: 0.8em;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .member-card-ff:hover {
+            background-color: rgba(0, 255, 255, 0.1);
+            transform: scale(1.05);
+            border-color: var(--color-ff-accent);
+            box-shadow: var(--ff-glow-orange);
+            color: #fff;
+        }
+        .member-card-ff:hover::before {
+            opacity: 1;
+            color: var(--color-ff-accent);
+        }
+
+
+        /* --- 6. Gallery Section --- */
+        .gallery-grid-ff {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .gallery-item-ff {
+            background-color: var(--color-ff-dark-bg);
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--ff-glow-blue);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .gallery-item-ff img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        .gallery-item-ff:hover {
+            transform: scale(1.03);
+            box-shadow: var(--ff-glow-orange), 0 0 20px rgba(228, 77, 38, 0.5);
+        }
+        .gallery-item-ff:hover img {
+            transform: scale(1.1);
+        }
+        .gallery-item-ff .overlay-ff {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .gallery-item-ff:hover .overlay-ff {
+            opacity: 1;
+        }
+        .gallery-item-ff .overlay-ff span {
+            color: var(--color-ff-neon-blue);
+            font-family: var(--font-primary);
+            font-size: 1.1rem;
+            text-shadow: var(--ff-glow-blue);
+        }
+
+        /* --- 7. Footer --- */
+        .futuristic-footer-ff {
+            background-color: var(--color-ff-dark-bg);
+            padding: 50px 5%;
+            text-align: center;
+            border-top: 2px solid var(--color-ff-neon-blue);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
+            animation: footerPulse 4s infinite alternate;
+        }
+
+        @keyframes footerPulse {
+            0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.7); }
+        }
+
+        .footer-motto-ff {
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            font-family: var(--font-primary);
+            color: var(--color-ff-accent);
+            text-shadow: var(--ff-glow-orange);
+            letter-spacing: 1px;
+        }
+
+        .contact-links-ff a {
+            text-decoration: none;
+            font-family: var(--font-primary);
+            color: var(--color-ff-neon-blue);
+            padding: 0 20px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            position: relative;
+        }
+
+        .contact-links-ff a::before {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%) scaleX(0);
+            width: 100%;
+            height: 1px;
+            background-color: var(--color-ff-neon-blue);
+            box-shadow: var(--ff-glow-blue);
+            transition: transform 0.3s ease-out;
+        }
+
+        .contact-links-ff a:hover {
+            color: #fff;
+            text-shadow: var(--ff-glow-blue);
+        }
+        .contact-links-ff a:hover::before {
+            transform: translateX(-50%) scaleX(1);
+        }
+
+
+        .link-separator-ff {
+            color: #444;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .copyright-ff {
+            margin-top: 20px;
+            font-size: 0.95rem;
+            color: var(--color-ff-text-dark);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar-ff {
+                flex-direction: column;
+                padding: 15px 5%;
+            }
+            .nav-links-ff {
+                margin-top: 15px;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links-ff a {
+                margin: 5px 10px;
+            }
+            .main-title-ff {
+                font-size: 4rem;
+            }
+            .slogan-ff {
+                font-size: 1.3rem;
+            }
+            .btn-ff {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+            .section-title-ff {
+                font-size: 2.2rem;
+            }
+            .section-title-ff::before, .section-title-ff::after {
+                width: 40px;
+                left: calc(50% - 120px);
+            }
+            .section-title-ff::after {
+                right: calc(50% - 120px);
+            }
+            .leaders-grid-ff, .members-grid-ff {
+                gap: 20px;
+            }
+            .leader-card-ff {
+                width: 180px;
+                padding: 25px 15px;
+            }
+            .member-card-ff {
+                font-size: 1rem;
+                padding: 18px;
+            }
+            .footer-motto-ff {
+                font-size: 1.3rem;
+            }
+            .contact-links-ff {
+                flex-direction: column;
+            }
+            .contact-links-ff a {
+                margin: 10px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="hero-banner-ff">
+        <nav class="navbar-ff">
+            <h1 class="nav-logo-ff">MARCOS</h1>
+            <div class="nav-links-ff">
+                <a href="#about">About</a>
+                <a href="#history">History</a>
+                <a href="#leaders">Leaders</a>
+                <a href="#members">Members</a>
+                <a href="#gallery">Gallery</a>
+            </div>
+        </nav>
+        <div class="hero-content-ff">
+            <h1 class="glowing-text-ff main-title-ff">MARCOS</h1>
+            <p class="slogan-ff">“Divided by States, United by MARCOS.”</p>
+            <a href="#" class="btn-ff">JOIN MARCOS</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="about" class="section-container-ff">
+            <h2 class="section-title-ff">ABOUT MARCOS</h2>
+            <p class="section-text-ff">
+                MARCOS is a legendary Free Fire guild created in 2017. Built on **loyalty, unity, and courage**, the guild brings players from different states together as one unstoppable force. We dominate the battlefield with precision and brotherhood.
+            </p>
+        </section>
+
+        <section id="history" class="section-container-ff">
+            <h2 class="section-title-ff">GUILD HISTORY</h2>
+            <div class="history-content-ff">
+                <p>MARCOS was founded in **2017 by Shikari**, a fearless leader who built the guild on teamwork and brotherhood, laying the foundation for our legacy.</p>
+                <p>The second era began under **Kaleen**, a strategic and disciplined leader supported by Kartik, Lucky, and Manas. Together, they pushed the guild into its golden age, achieving unparalleled victories.</p>
+                <p>Later, **Guddu** took charge. With the help of Ayush, Priyam, Lucky, Masoom, Momo, and Anshu, he kept the guild strong and united through various challenges.</p>
+                <p>Eventually, MARCOS went through a **downfall phase**, losing activity and members, a true test of its resilience.</p>
+                <p>Then came **Mythc (Ayush)**, an old member who returned and helped revive the guild from the ground up. His comeback brought old players together and rebuilt the MARCOS spirit, proving that legends never truly die.</p>
+                <p>Today, under the leadership of **Lucky**, MARCOS is back to its original glory — powerful, united, and respected across the battlefield.</p>
+                <p class="glowing-quote-ff">"Once a MARCOS, Always a MARCOS."</p>
+            </div>
+        </section>
+
+        <section id="leaders" class="section-container-ff">
+            <h2 class="section-title-ff">LEADERS TIMELINE</h2>
+            <div class="leaders-grid-ff">
+                <div class="leader-card-ff">
+                    <h3 class="leader-name-ff">Shikari</h3>
+                    <p class="leader-role-ff">(Founder, 2017)</p>
+                </div>
+                <div class="leader-card-ff">
+                    <h3 class="leader-name-ff">Kaleen</h3>
+                    <p class="leader-role-ff">(Golden Era Tactician)</p>
+                </div>
+                <div class="leader-card-ff">
+                    <h3 class="leader-name-ff">Guddu</h3>
+                    <p class="leader-role-ff">(Unification Commander)</p>
+                </div>
+                <div class="leader-card-ff current-leader-ff">
+                    <h3 class="leader-name-ff">Lucky</h3>
+                    <p class="leader-role-ff">(Current Apex Leader)</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="members" class="section-container-ff">
+            <h2 class="section-title-ff">CORE MEMBERS</h2>
+            <div class="members-grid-ff">
+                <div class="member-card-ff">Kartik</div>
+                <div class="member-card-ff">Lucky</div>
+                <div class="member-card-ff">Manas</div>
+                <div class="member-card-ff">Priyam</div>
+                <div class="member-card-ff">Ayush (Mythc)</div>
+                <div class="member-card-ff">Masoom</div>
+                <div class="member-card-ff">Momo</div>
+                <div class="member-card-ff">Anshu</div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section-container-ff">
+            <h2 class="section-title-ff">Our current Leaders</h2>
+            <div class="gallery-grid-ff">
+                <div class="gallery-item-ff">
+                    <img src="https://images.unsplash.com/photo-1629845348981-64e0a7114d59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Guddu Account">
+                    <div class="overlay-ff"><span>Guddu</span></div>
+                </div>
+                <div class="gallery-item-ff">
+                    <img src="https://images.unsplash.com/photo-1626218625906-bb1654877395?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Masoom Account">
+                    <div class="overlay-ff"><span>Masoom</span></div>
+                </div>
+                <div class="gallery-item-ff">
+                    <img src="https://images.unsplash.com/photo-1627993077977-2f63e63f9720?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Ayush Account">
+                    <div class="overlay-ff"><span>Snow(Mythc)</span></div>
+                </div>
+                <div class="gallery-item-ff">
+                    <img src="https://images.unsplash.com/photo-1627993077977-2f63e63f9720?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Lucky Account">
+                    <div class="overlay-ff"><span>Ocean(Lucky)</span></div>
+                 </div>
+                 <div class="gallery-item-ff">
+                    <img src="https://images.unsplash.com/photo-1629845348981-64e0a7114d59?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Mannu Account">
+                    <div class="overlay-ff"><span>Raftaar(Mannu)</span></div>
+                </div>
+                <div class="gallery-item-ff">
+                    <img src="https://images.unsplash.com/photo-1626218625906-bb1654877395?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=600&q=80" alt="Manas Account">
+                    <div class="overlay-ff"><span>Manas</span></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="futuristic-footer-ff">
+        <h3 class="footer-motto-ff">Divided by States, United by MARCOS.</h3>
+        <div class="contact-links-ff">
+            <a href="#" class="neon-link-ff">Discord Channel</a>
+            <span class="link-separator-ff">|</span>
+            <a href="#" class="neon-link-ff">WhatsApp Group</a>
+        </div>
+        <p class="copyright-ff">&copy; 2017 MARCOS Guild. All rights reserved. Dominate the battlefield.</p>
+    </footer>
+
+</body>
+</html>
